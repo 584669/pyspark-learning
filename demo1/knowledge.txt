@@ -1,1 +1,5 @@
+filter(lambda x:...) 筛选函数。
+RDD.persist() 缓存
+.count() 数量
+.first() 第一个
 

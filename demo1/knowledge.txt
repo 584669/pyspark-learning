@@ -5,3 +5,61 @@ RDD.persist() 缓存一部分到内存
 .union()合并
 .take() 获取一部分 例如：for line in RDD.take(10) print line
 .collect() 获取整个数据
+.map() 和pandas一个用用法.
+.flatMap() 一个输入，多个输出。例如返回一个list
+.distinct() 去重，开销大
+a.intersetion(b)  交集
+a.subtract().b a有b没有
+a.cartesian(b) (a,b)笛卡尔积
+rdd.sample(false,0.5) 下采样，false代表不替换，0.5代表采样率
+rdd.reduce(lambda x,y:x+y) rdd中所有元素的和
+rdd.fold(0)(lambda x,y:x+y) 比reduce多一个初始值,
+rdd.aggergate() 比较复杂，回头看
+rdd.countByValue() 各个元素出现的次数
+rdd.top() 最前面的几个元素
+rdd.foreach(func) 每个元素都使用给定的值
+________________________________________
+Pair-RDD
+创建pair=lines.map(lambda x:x.split()[0],x)
+rdd.reduceByKey(func) 合并具有相同健的值
+rdd.groupByKey() 具有相同健的值进行分组
+.mapValues(func) 类似与map()
+rdd.keys() 返回健的rdd
+rdd.values() 仅包含值的rdd
+rdd.sortByKey() 返回根据健排序的rdd
+rdd.join(a) 内连接
+rdd.rightOuterJoin() 右连接
+rdd.leftOuterJoin() 左连接
+rdd.cogroup() 将2个分组连接到一起，一般先经过groupByKey()
+例子
+计算每个健对应的平均值
+rdd.mapValues(labdma x:(x,1)).reduceByKey(lambda x,y:(x[0]+y[0],x[1]+y[1]))
+-------------------------------------------------------------
+spark-sql
+rdd.cache()缓存
+----------------------------------------------
+实战
+textFile.filter(textFile.value.contains("Spark")).count()
+
+from pyspark.sql.functions import *
+textFile.select(size(split(textFile.value, "\s+")).name("numWords")).agg(max(col("numWords"))).collect()
+name取别名,agg
+rdd.getItem(feature).cast("double")
+
+textFile.select(explode(split(textFile.value, "\s+")).alias("word")).groupBy("word").count()
+ecxplode
+alias
+groupBy
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,7 @@
-filter(lambda x:...) 筛选函数。
-RDD.persist() 缓存
+filter(lambda x:...) 筛选函数。不会改变原有rdd，创建个新的，返回
+RDD.persist() 缓存一部分到内存
 .count() 数量
 .first() 第一个
-
+.union()合并
+.take() 获取一部分 例如：for line in RDD.take(10) print line
+.collect() 获取整个数据
